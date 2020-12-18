@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block title %}My super awesome homepage{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-sm-6 col-md-3">
+                <div class="card my-4">
+                    {% thumbnail post.image "200x200" crop="center" as im %}
+                        <img src="{{ im.url }}" class="card-img-top" alt="...">
+                    {% endthumbnail %}
+                    <div class="card-body">
+                        <p class="card-text">{{ post.text }}</p>
+                        <a href="{% url 'feed:detail' post.id %}" class="btn btn-primary">View Full Image</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-sm-6 offset-3 text-center py-5 my-5">
+                <h3>Welcome!</h3>
+                <p>Add your first image?</p>
+                <a href="{% url 'feed:post' %}" class="btn btn-lg btn-success">Upload Image</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

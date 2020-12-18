@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Default title{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+
+    {% include "includes/navbar.html" %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="bg-{% if message.tags %}{{ message.tags }}{% else %}success{% endif %}  bg-gradient text-center text-white py-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+</body>
+</html>
